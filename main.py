@@ -81,13 +81,24 @@ scraper = SuperFlixScraper()
 # --- ROTAS DO STREMIO ---
 
 MANIFEST = {
-    "id": "br.superflix.scraper",
-    "version": "1.0.1",
+    "id": "br.superflix.vip.addon",
+    "version": "1.0.2",
     "name": "SuperFlix VIP",
-    "description": "Filmes e Séries Dublados/Legendados via API",
-    "resources": ["stream"],
+    "description": "Filmes e Séries via API (Links Diretos)",
+    "logo": "https://superflixapi.run/img/favicon/192.png?v=v2.5",
+    "resources": [
+        {
+            "name": "stream",
+            "types": ["movie", "series"],
+            "idPrefixes": ["tt"]
+        }
+    ],
     "types": ["movie", "series"],
-    "idPrefixes": ["tt"]
+    "catalogs": [],  
+    "behaviorHints": {
+        "configurable": False,
+        "configurationRequired": False
+    }
 }
 
 @app.route('/manifest.json')
@@ -134,3 +145,4 @@ def stream_handler(type, id):
 if __name__ == '__main__':
     port = int(os.environ.get("PORT", 10000))
     app.run(host='0.0.0.0', port=port)
+
